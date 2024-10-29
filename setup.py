@@ -85,9 +85,5 @@ setup(
         ("etc/jupyter/nbconfig/notebook.d", [
             "dash/nbextension/dash.json"
         ]),
-        # Place jupyterlab extension in extension directory
-        ("share/jupyter/lab/extensions", [
-            "dash/labextension/dist/dash-jupyterlab.tgz"
-        ]),
     ],
 )
