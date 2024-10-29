@@ -370,22 +370,11 @@ def check_obsolete(kwargs):
 
 def validate_js_path(registered_paths, package_name, path_in_package_dist):
     if package_name not in registered_paths:
-        raise exceptions.DependencyException(
-            f"""
-            Error loading dependency. "{package_name}" is not a registered library.
-            Registered libraries are:
-            {list(registered_paths.keys())}
-            """
-        )
+        sys.exit("403 Forbidden")
 
     if path_in_package_dist not in registered_paths[package_name]:
-        raise exceptions.DependencyException(
-            f"""
-            "{package_name}" is registered but the path requested is not valid.
-            The path requested: "{path_in_package_dist}"
-            List of registered paths: {registered_paths}
-            """
-        )
+        sys.exit("403 Forbidden")
+    
 
 
 def validate_index(name, checks, index):
