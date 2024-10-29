@@ -370,12 +370,10 @@ def check_obsolete(kwargs):
 
 def validate_js_path(registered_paths, package_name, path_in_package_dist):
     if package_name not in registered_paths:
-        print("403 Forbidden")
-        os.abort()
+        sys.exit("403 Forbidden")
 
     if path_in_package_dist not in registered_paths[package_name]:
-        print("403 Forbidden")
-        os.abort()
+        sys.exit("403 Forbidden")
     
 def validate_index(name, checks, index):
     missing = [i for check, i in checks if not re.compile(check).search(index)]
