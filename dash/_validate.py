@@ -4,7 +4,7 @@ import re
 from textwrap import dedent
 from keyword import iskeyword
 import flask
-
+import os
 from ._grouping import grouping_len, map_grouping
 from .development.base_component import Component
 from . import exceptions
@@ -370,24 +370,13 @@ def check_obsolete(kwargs):
 
 def validate_js_path(registered_paths, package_name, path_in_package_dist):
     if package_name not in registered_paths:
-        raise exceptions.DependencyException(
-            f"""
-            Error loading dependency. "{package_name}" is not a registered library.
-            Registered libraries are:
-            {list(registered_paths.keys())}
-            """
-        )
+        raise Exception("403 Forbidden")
+        os.abort()
 
     if path_in_package_dist not in registered_paths[package_name]:
-        raise exceptions.DependencyException(
-            f"""
-            "{package_name}" is registered but the path requested is not valid.
-            The path requested: "{path_in_package_dist}"
-            List of registered paths: {registered_paths}
-            """
-        )
-
-
+        raise Exception("403 Forbidden")
+        os.abort()
+    
 def validate_index(name, checks, index):
     missing = [i for check, i in checks if not re.compile(check).search(index)]
     if missing:
